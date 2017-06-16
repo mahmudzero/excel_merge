@@ -8,21 +8,16 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace excel_merge
-{
-    class Program
-    {
+namespace excel_merge {
+    class Program {
 
-        static void print(object value)
-        {
+        static void print(object value) {
             Console.WriteLine(value);
             Trace.WriteLine(value);
         }
 
-        public static void CreatDoc(String fileName, SpreadsheetDocumentType documentType)
-        {
-            using (SpreadsheetDocument excelSpreadsheet = SpreadsheetDocument.Create(fileName, documentType))
-            {
+        public static void createDoc(String fileName, SpreadsheetDocumentType documentType) {
+            using (SpreadsheetDocument excelSpreadsheet = SpreadsheetDocument.Create(fileName, documentType)) {
                 //adding a workbook to the excelSpreadsheet
                 WorkbookPart workbook = excelSpreadsheet.AddWorkbookPart();
                 workbook.Workbook = new Workbook();
@@ -34,13 +29,13 @@ namespace excel_merge
                 Sheet sheet = new Sheet() { Id = workbook.GetIdOfPart(worksheet), SheetId = 1, Name = "Combined Sheet" };
                 sheets.Append(sheet);
                 workbook.Workbook.Save();
-
+                print("Finished making document");
             }
         }
 
-        static void Main(string[] args)
-        {
+        static void Main(string[] args) {
             print("Running");
+            createDoc(@"./testDoc.xlsm", SpreadsheetDocumentType.MacroEnabledWorkbook);
 
         }
     }
