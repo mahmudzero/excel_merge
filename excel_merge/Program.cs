@@ -13,17 +13,35 @@ namespace excel_merge
     class Program
     {
 
+        static void print(object value)
+        {
+            Console.WriteLine(value);
+            Trace.WriteLine(value);
+        }
+
         public void CreatDoc(String fileName, SpreadsheetDocumentType documentType)
         {
             using (SpreadsheetDocument excelSpreadsheet = SpreadsheetDocument.Create(fileName, documentType))
             {
-                WorkbookPart workbookPart = excelSpreadsheet.AddWorkbookPart();
+                //adding a workbook to the excelSpreadsheet
+                WorkbookPart workbook = excelSpreadsheet.AddWorkbookPart();
+                workbook.Workbook = new Workbook();
+                //add a worksheet to the wokrbook
+                WorksheetPart worksheet = workbook.AddNewPart<WorksheetPart>();
+                worksheet.Worksheet = new Worksheet(new SheetData());
             }
         }
 
+        static int add(int x, int y)
+        {
+            return x + y;
+        }
+
+
         static void Main(string[] args)
         {
-            Debug.WriteLine("Running");
+            print("Running");
+            print(add(5, 3));
         }
     }
 }
