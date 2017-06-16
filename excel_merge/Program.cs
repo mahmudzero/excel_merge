@@ -19,7 +19,7 @@ namespace excel_merge
             Trace.WriteLine(value);
         }
 
-        public void CreatDoc(String fileName, SpreadsheetDocumentType documentType)
+        public static void CreatDoc(String fileName, SpreadsheetDocumentType documentType)
         {
             using (SpreadsheetDocument excelSpreadsheet = SpreadsheetDocument.Create(fileName, documentType))
             {
@@ -29,19 +29,19 @@ namespace excel_merge
                 //add a worksheet to the wokrbook
                 WorksheetPart worksheet = workbook.AddNewPart<WorksheetPart>();
                 worksheet.Worksheet = new Worksheet(new SheetData());
+                //adding sheets to the workbook
+                Sheets sheets = workbook.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet() { Id = workbook.GetIdOfPart(worksheet), SheetId = 1, Name = "Combined Sheet" };
+                sheets.Append(sheet);
+                workbook.Workbook.Save();
+
             }
         }
-
-        static int add(int x, int y)
-        {
-            return x + y;
-        }
-
 
         static void Main(string[] args)
         {
             print("Running");
-            print(add(5, 3));
+
         }
     }
 }
