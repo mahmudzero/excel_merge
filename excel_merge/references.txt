@@ -1,0 +1,3 @@
+http://www.dispatchertimer.com/tutorial/how-to-create-an-excel-file-in-net-using-openxml-part-1-basics/
+https://stackoverflow.com/questions/3808368/c-sharp-how-to-copy-a-single-excel-worksheet-from-one-workbook-to-another
+https://stackoverflow.com/questions/27285615/how-do-i-merge-multiple-excel-files-to-a-single-excel-file
